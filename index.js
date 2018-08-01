@@ -1,18 +1,18 @@
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require('express');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
-const findNearestLocation = require('map-nearest-location')
+const findNearestLocation = require('map-nearest-location');
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 const User = require('./models/User');
 const Group = require('./models/Group');
 const Place = require('./models/Place');
 const bodyParser = require('body-parser');
-const Locations = require('./locations.json')
+const Locations = require('./locations.json');
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 // app.use(bodyParser.json({ type : '*/*' })); // force json
 
