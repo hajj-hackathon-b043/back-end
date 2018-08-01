@@ -7,4 +7,6 @@ const GroupSchema = new Schema({
     members: [String],
 });
 
+GroupSchema.index({name: 1}, {unique: true});
+
 module.exports = mongoose.model('Groups', GroupSchema);

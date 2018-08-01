@@ -8,4 +8,6 @@ const UserSchema = new Schema({
     lastLocation: Object,
 });
 
+UserSchema.index({id: 1}, {unique: true});
+
 module.exports = mongoose.model('Users', UserSchema);
