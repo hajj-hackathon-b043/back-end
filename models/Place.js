@@ -6,6 +6,6 @@ const PlaceSchema = new Schema({
     location: Object,
 });
 
-PlaceSchema.index({category: 1}, {unique: true});
+PlaceSchema.index({category: 1}, {unique: false});
 
 module.exports = mongoose.model('Places', PlaceSchema);
