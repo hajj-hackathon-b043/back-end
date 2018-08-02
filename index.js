@@ -126,6 +126,10 @@ app.get('/category/:type', (req,res)=>{
     })
 })
 
+app.get('*', (req,res)=>{
+    res.json({error: 'worng end point'})
+})
+
 app.listen(PORT,()=>{
     console.log('server opend on ' + PORT)
 })
