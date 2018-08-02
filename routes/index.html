@@ -42,7 +42,7 @@
         center: {lat: -34.397, lng: 150.644},
         zoom: 8
     });
-    var socket = io('http://localhost:3123');
+    var socket = io('http://localhost:3000');
     socket.on('locations', function(locations){
         locations = locations || [];
         var markers = locations.map(function(location) {
