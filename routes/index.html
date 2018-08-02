@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cordova Background Geolocation Tracking</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBX58NPgmudlb7Aa1K4Y1qGtBir-4eorBk",
+        authDomain: "hajj-hackathon-212022.firebaseapp.com",
+        databaseURL: "https://hajj-hackathon-212022.firebaseio.com",
+        projectId: "hajj-hackathon-212022",
+        storageBucket: "hajj-hackathon-212022.appspot.com",
+        messagingSenderId: "642994167336"
+    };
+    firebase.initializeApp(config);
+</script>
+
+
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDOJ2cvoLRBVGQfDYedTWr2UJnepR3E6Go"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script>
+    var allMarkers = [];
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+    });
+    var socket = io('http://localhost:3123');
+    socket.on('locations', function(locations){
+        locations = locations || [];
+        var markers = locations.map(function(location) {
+            console.log(location);
+            var marker = new google.maps.Marker({
+                position: {lat: location.latitude, lng: location.longitude},
+                map: map
+            });
+            map.setCenter(marker.getPosition());
+            return marker;
+        });
+        allMarkers = allMarkers.concat(markers);
+    });
+</script>
+
+
+
+</body>
+</html>

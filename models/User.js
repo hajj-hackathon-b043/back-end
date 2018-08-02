@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     team: String,
     food: String,
     lastLocation: Object,
+    fcm_token: String,
 });
 
 UserSchema.index({id: 1}, {unique: true});

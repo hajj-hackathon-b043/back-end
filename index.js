@@ -10,10 +10,13 @@ const Place = require('./models/Place');
 const bodyParser = require('body-parser');
 const Locations = require('./locations.json');
 
+const http       = require('http').Server(app);
+const io         = require('socket.io')(http);
+
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(morgan('dev'));
-
+app.use(express.static('./public'));
 // app.use(bodyParser.json({ type : '*/*' })); // force json
 
 app.all('/*', function(req, res, next) {
@@ -118,6 +121,11 @@ app.post('/category',(req,res)=>{
     }
 })
 
-app.listen(PORT,()=>{
+io.on('connection', function(socket){
+    global.io = io;
+    console.log('a user connected');
+});
+
+http.listen(PORT,()=>{
     console.log('server opend on ' + PORT)
-})
+});
