@@ -117,6 +117,14 @@ app.post('/category',(req,res)=>{
         })
     }
 })
+app.get('/category/:type', (req,res)=>{
+    let category = req.params.type;
+    Place.findOneAndUpdate({category},{$inc:{views: 1}},{new: true }).then(dRes=>{
+        res.json({status: true})
+    }).catch(error=>{
+        res.json({status: false, error: error.message})
+    })
+})
 
 app.listen(PORT,()=>{
     console.log('server opend on ' + PORT)
