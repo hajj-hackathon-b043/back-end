@@ -5,6 +5,7 @@ const UserSchema = new Schema({
     id: {type: String, required: true},
     team: String,
     food: String,
+    gender:Boolean,
     lastLocation: Object,
     fcm_token: String,
 });
