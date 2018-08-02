@@ -83,6 +83,16 @@ app.post('/user', (req,res)=>{
     }
 })
 
+app.get('/team/location/:name',(req,res)=>{
+        let name = req.params.name
+        if( Locations[name]){
+            res.json({location: Locations[name]}) 
+        }else{
+            res.json({location: []}) 
+        }
+           
+})
+
 app.post('/lastLocation', (req,res)=>{
     let id = req.body.id
     let lastLocation = req.body.lastLocation
