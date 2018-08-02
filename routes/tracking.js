@@ -1,6 +1,6 @@
 const app = require('express')();
-// const http = require('http').Server(app);
-// const io = require('socket.io')(http);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const router = require('express').Router();
 const Group = require('../models/Group');
 
@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 
 router.post('/locations', function (req, res) {
     const name = req.body[0].group;
-    global.io.emit('locations', req.body);
+    io.emit('locations', req.body);
 
     const location = {
         lat: req.body[0].latitude,

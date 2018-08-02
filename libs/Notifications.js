@@ -11,18 +11,38 @@ admin.initializeApp({
 
 function notify({token, message}) {
 
-    const message = {
+    const msg = {
         token: token,
         notification: {
             'title': message.title,
             'body': message.body,
-            'icon': 'https://cdn.dextra.art/website/assets/1501776716680-image.jpg',
-            'click_action': 'http://localhost:3000'
+            // 'icon': 'https://cdn.dextra.art/website/assets/1501776716680-image.jpg',
+            // 'click_action': 'http://localhost:3000'
         },
         data: {},
     };
 
-    admin.messaging().send(message)
+    admin.messaging().send(msg)
+        .then((response) => {
+            // Response is a message ID string.
+            console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.log('Error sending message:', error);
+        });
+}
+function notifyTopic({topic, message}) {
+
+    const msg = {
+        notification: {
+            'title': message.title,
+            'body': message.body,
+        },
+        data: {},
+        topic: topic,
+    };
+
+    admin.messaging().send(msg)
         .then((response) => {
             // Response is a message ID string.
             console.log('Successfully sent message:', response);
@@ -47,4 +67,5 @@ function addToTopic({fcm_token, topic}) {
 module.exports = {
     addToTopic: (obj) => addToTopic(obj),
     notify: (obj) => notify(obj),
-}
+    notifyTopic: (obj) => notifyTopic(obj),
+};
