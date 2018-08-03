@@ -107,7 +107,7 @@ app.post('/lastLocation', (req,res)=>{
 })
 app.get('/lastLocation/:team', (req,res)=>{
     let team = req.params.team
-    User.find({team}).then(dRes =>{
+    User.find({group:team}).then(dRes =>{
         if(dRes){
             let locations = dRes.map(obj => obj.lastLocation)
             res.json({locations})
